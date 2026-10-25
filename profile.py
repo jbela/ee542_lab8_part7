@@ -24,7 +24,7 @@ for index in range(2):
     )
     lan.addInterface(interface)
 
-    storage = node.Blockstore("docker-storage", "/mydata")
+    storage = node.Blockstore("docker-storage-{}".format(index), "/mydata")
     storage.size = "100GB"
     storage.placement = "nonsysvol"
 
