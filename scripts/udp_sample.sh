@@ -9,7 +9,7 @@ img=nvcr.io/nvidia/doca/doca:devel-cuda13.0.0-3.5.0-devel-host
 sudo docker pull "$img"
 # Write command output back to the host via mounted results directory.
 sudo docker run --rm --privileged --net=host --gpus all   -v /dev/infiniband:/dev/infiniband   -v /dev/hugepages:/dev/hugepages   -v /opt/mellanox/gdrcopy/src:/opt/gdrcopy:ro   -v "$HOME/lab8_results:/results"   -e GPU="$GPU" -e NIC="$NIC" "$img" bash -lc '
-    export LD_LIBRARY_PATH=/opt/gdrcopy:${{LD_LIBRARY_PATH:-}}
+    export LD_LIBRARY_PATH=/opt/gdrcopy:${LD_LIBRARY_PATH:-}
     cd /opt/mellanox/doca/samples/doca_gpunetio/gpunetio_simple_receive
     meson setup /tmp/build --buildtype=release && ninja -C /tmp/build || exit 1
     set +e
